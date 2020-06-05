@@ -1,0 +1,123 @@
+.Header {
+  margin: auto;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+}
+
+@media screen and (max-width: 580px) {
+  .Header {
+    flex-direction: column;
+  }
+}
+
+.Header .menuSpan {
+  cursor: pointer;
+  width: 60px;
+  font-size: 30px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.Header .menuSpan:after {
+  position: relative;
+  top: 5px;
+  background-image: url("../pictures/menuImg.png");
+  background-size: 30px 30px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  content: "";
+}
+
+.Header .eraImg {
+  width: 200px;
+}
+
+.Header nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (max-width: 580px) {
+  .Header nav {
+    flex-direction: column;
+  }
+}
+
+.Header nav .Navlink {
+  height: 40px;
+  width: 10vw;
+  border-right: solid 1px #555555;
+  color: #585858;
+  position: relative;
+  transition: 0.2s;
+}
+
+@media screen and (max-width: 880px) {
+  .Header nav .Navlink {
+    width: 15vw;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .Header nav .Navlink {
+    width: 80vw;
+    border-right: none;
+  }
+}
+
+.Header nav .Navlink .dropdownContent {
+  display: none;
+  position: relative;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 5px;
+  z-index: 1;
+}
+
+.Header nav .Navlink .dropdownContent .Navlink {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-bottom: solid 1px #555555;
+}
+
+.Header nav .Navlink .dropdownContent .Navlink:last-child {
+  border: none;
+}
+
+.Header nav .Navlink:last-child {
+  border-right: none;
+}
+
+.Header nav .Navlink:link, .Header nav span {
+  background-color: #ffffff;
+  cursor: pointer;
+  font-size: 20px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 1000;
+  line-height: 40px;
+}
+
+.Header nav .Navlink:hover {
+  background-color: #0576ff;
+  color: white;
+}
+
+.Header nav .Navlink:hover .dropdownContent {
+  display: block;
+}

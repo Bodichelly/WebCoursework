@@ -1,0 +1,39 @@
+.MainWindow {
+  background-color: #e0e0e0;
+  width: 90%;
+  height: 100%;
+  margin: auto;
+}
+
+.footer {
+  margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  background-color: #2e2e2e;
+}
+
+.header {
+  width: 100%;
+  height: 40px;
+  background-color: #2e2e2e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h2 {
+  text-align: center;
+  color: white;
+  margin: 10px;
+}
+
+.header .signIn {
+  display: flex;
+}
+
+.header .signIn .authorisationButton {
+  color: white;
+  border-left: solid 1px white;
+  margin: auto;
+  padding: 5px;
+}

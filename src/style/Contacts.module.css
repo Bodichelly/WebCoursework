@@ -1,0 +1,72 @@
+@charset "UTF-8";
+.mapWrapper {
+  position: relative;
+  margin: auto;
+  width: 70vw;
+  height: 60vh;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wrapper .contact {
+  padding: 15px;
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+}
+
+@media screen and (max-width: 1200px) {
+  .wrapper .contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapper .contact .image img {
+  width: 130px;
+}
+
+.wrapper .contact .info {
+  font-size: 20px;
+  text-decoration: none;
+  color: #363636;
+  text-align: center;
+  font-weight: 1000;
+  line-height: 40px;
+}
+
+.wrapper .contact .info address {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper .contact .info address span {
+  text-decoration: none;
+  color: #363636;
+  font-weight: 500;
+}
+
+.wrapper .contact .info address span:first-child {
+  font-weight: 1000;
+}
+
+.wrapper .contact .info address a {
+  text-decoration: none;
+  color: #363636;
+  border-top: solid 1px #555555;
+}
+
+.wrapper .contact .info address a[href^="mailto"]::before {
+  content: "📧 ";
+}
+
+.wrapper .contact .info address a[href^="tel"]::before {
+  content: "📞 ";
+}

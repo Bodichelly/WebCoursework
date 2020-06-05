@@ -1,0 +1,468 @@
+@mixin page-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 40px;
+    gap: 1px 1px;
+    grid-template-areas: "filtres services services services services" "pagination pagination pagination pagination pagination";
+
+    @media screen and (max-width: 600px) {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 40px;
+        gap: 1px 1px;
+        grid-template-areas: "filtres" "services" "pagination";
+    }
+}
+@mixin ServicePanel-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+    }
+}
+
+@mixin CheckBoxStyle {
+    .bcontain *,
+    .bcontain *::before,
+    .bcontain *::after {
+        box-sizing: content-box !important;
+    }
+
+    .bcontain input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+    }
+
+    .bcontain span {
+        line-height: 1.52;
+        font-size: 0.93rem;
+        font-family: inherit;
+    }
+
+    .bcontain {
+        display: table;
+        position: relative;
+        padding-left: 1.9rem;
+        cursor: pointer;
+        margin-bottom: 0.48rem;
+    }
+
+    .bcontain input[type="checkbox"] ~ .binput {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1.25rem;
+        width: 1.25rem;
+        background: rgba(241, 245, 248, 1);
+        transition: background 250ms;
+        border: 1px solid rgba(184, 194, 204, 1);
+        border-radius: 0.226rem;
+    }
+
+    .bcontain input[type="radio"] ~ .binput {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1.25rem;
+        width: 1.25rem;
+        background: rgba(241, 245, 248, 1);
+        transition: background 250ms;
+        border: 1px solid rgba(184, 194, 204, 1);
+        border-radius: 2rem;
+    }
+
+    .bcontain input[type="checkbox"] ~ .binput::after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 0.45rem;
+        top: 0.18rem;
+        width: 0.25rem;
+        height: 0.6rem;
+        border: solid rgba(255, 255, 255, 1);
+        border-width: 0 2px 2px 0;
+        transition: background 250ms;
+        transform: rotate(45deg);
+    }
+
+    .bcontain input[type="radio"] ~ .binput::after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 0.25rem;
+        top: 0.25rem;
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 2rem;
+        background: rgba(255, 255, 255, 1);
+        transition: background 250ms;
+    }
+
+    .bcontain input:disabled ~ .binput::after {
+        border-color: rgba(135, 149, 161, 1);
+    }
+
+    .bcontain input:checked ~ .binput::after {
+        display: block;
+    }
+
+    .bcontain:hover input ~ .binput,
+    .bcontain input:focus ~ .binput {
+        background: rgb(231, 238, 243);
+    }
+
+    .bcontain input:focus ~ .binput {
+        box-shadow: 0 0 0 2px rgba(52, 144, 220, 0.5);
+    }
+
+    .bcontain input:checked ~ .binput {
+        background: rgba(0, 130, 243, 1);
+        border-color: rgba(0, 130, 243, 1);
+    }
+
+    .bcontain input[type="checkbox"]:disabled ~ .binput {
+        background: rgba(241, 245, 248, 1);
+        border-color: rgba(184, 194, 204, 1);
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .bcontain input[type="radio"]:disabled ~ .binput {
+        background: rgba(241, 245, 248, 1);
+        border-color: rgba(184, 194, 204, 1);
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .bcontain input[type="radio"]:disabled ~ .binput::after {
+        background: rgba(135, 149, 161, 1);
+    }
+
+    .bcontain input:checked:focus ~ .binput,
+    .bcontain:hover input:not([disabled]):checked ~ .binput {
+        background: rgba(13, 143, 255, 1);
+        border-color: rgba(13, 143, 255, 1);
+    }
+
+    .bcontain .binput::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3rem;
+        height: 3rem;
+        margin-left: -0.85rem;
+        margin-top: -0.85rem;
+        background: rgba(0, 130, 243, 1);
+        border-radius: 2rem;
+        opacity: 0.6;
+        z-index: 99999;
+        transform: scale(0);
+    }
+
+    @keyframes b-ripple {
+        0% {
+            transform: scale(0);
+        }
+
+        20% {
+            transform: scale(1);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes b-ripple-duplicate {
+        0% {
+            transform: scale(0);
+        }
+
+        30% {
+            transform: scale(1);
+        }
+
+        60% {
+            transform: scale(1);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(1);
+        }
+    }
+
+    .bcontain input + .binput::before {
+        animation: b-ripple 250ms ease-out;
+    }
+
+    .bcontain input:checked + .binput::before {
+        animation-name: b-ripple-duplicate;
+    }
+
+    .bcontain .binput::before {
+        visibility: hidden;
+    }
+
+    .bcontain input:focus + .binput::before {
+        visibility: visible;
+    }
+
+    .bcontain:first-child .binput::before {
+        visibility: hidden;
+    }
+    // input[type="checkbox"].csscheckbox {
+    //     position: absolute;
+    //     z-index: -1000;
+    //     left: -1000px;
+    //     overflow: hidden;
+    //     clip: rect(0 0 0 0);
+    //     height: 1px;
+    //     width: 1px;
+    //     margin: -1px;
+    //     padding: 0;
+    //     border: 0;
+    // }
+
+    // input[type="checkbox"].csscheckbox + label.csslabel {
+    //     padding-left: 30px;
+    //     height: 25px;
+    //     display: inline-block;
+    //     line-height: 25px;
+    //     background-repeat: no-repeat;
+    //     background-position: 0 0;
+    //     font-size: 25px;
+    //     vertical-align: middle;
+    //     cursor: pointer;
+    // }
+
+    // input[type="checkbox"].csscheckbox:checked + label.csslabel {
+    //     background-position: 0 -25px;
+    // }
+
+    // label.csslabel {
+    //     background-image: url(http://csscheckbox.com/checkboxes/u/csscheckbox_391ce065f36b1460c4845fa9b5173fba.png);
+    //     -webkit-touch-callout: none;
+    //     -webkit-user-select: none;
+    //     -khtml-user-select: none;
+    //     -moz-user-select: none;
+    //     -ms-user-select: none;
+    //     user-select: none;
+    // }
+}
+
+.Services {
+    @include page-layout();
+    .FilterSerchBar {
+        grid-area: filtres;
+        padding: 20px;
+        margin: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: white;
+        -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+
+        .SearchBar {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+            border-bottom: solid 1px rgb(56, 56, 56);
+            margin-bottom: 5px;
+            width: 100%;
+            .searchInput {
+                margin-top: 10px;
+                padding: 8px;
+                font-size: 15px;
+                border-width: 0px;
+                border-color: #cccccc;
+                background-color: #ffffff;
+                color: #000000;
+                border-style: solid;
+                border-radius: 21px;
+                box-shadow: 0px 0px 7px rgba(66, 66, 66, 0.48);
+                text-shadow: 0px 0px 0px rgba(66, 66, 66, 0);
+            }
+            .searchInput:focus {
+                outline: none;
+            }
+        }
+
+        .FilterBar {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+            border-bottom: solid 1px rgb(56, 56, 56);
+            margin-bottom: 5px;
+            margin-top: 5px;
+            width: 100%;
+            @include CheckBoxStyle();
+        }
+        .SortBar {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+            border-bottom: solid 1px rgb(56, 56, 56);
+            margin-bottom: 5px;
+            margin-top: 5px;
+            width: 100%;
+            .select {
+                position: relative;
+                display: inline-block;
+                margin-bottom: 15px;
+                width: 100%;
+            }
+            .select select {
+                font-family: "Arial";
+                display: inline-block;
+                width: 100%;
+                cursor: pointer;
+                padding: 6px 11px;
+                outline: 0;
+                border: 0px solid #000000;
+                border-radius: 100px;
+                background: #aac4fa;
+                color: #232323;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+            }
+            .select select::-ms-expand {
+                display: none;
+            }
+            .select select:hover,
+            .select select:focus {
+                color: #000000;
+                background: #c2cef7;
+            }
+            .select select:disabled {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+            .select_arrow {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                pointer-events: none;
+                border-style: solid;
+                border-width: 8px 5px 0px 5px;
+                border-color: #7b7b7b transparent transparent transparent;
+            }
+            .select select:hover ~ .select_arrow,
+            .select select:focus ~ .select_arrow {
+                border-top-color: #000000;
+            }
+            .select select:disabled ~ .select_arrow {
+                border-top-color: #cccccc;
+            }
+        }
+        .applyButton {
+            margin: auto;
+            background-color: #44c767;
+            border-radius: 22px;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 20px;
+            padding: 9px 25px;
+            text-decoration: none;
+        }
+        .applyButton:hover {
+            background-color: #67db6f;
+        }
+        .applyButton:active {
+            position: relative;
+            top: 1px;
+        }
+
+        .resetButton {
+            margin: auto;
+            background-color: #f0f0f0;
+            border-radius: 22px;
+            display: inline-block;
+            cursor: pointer;
+            color: #262626;
+            font-family: Arial;
+            font-size: 20px;
+            padding: 9px 14px;
+            text-decoration: none;
+        }
+        .resetButton:hover {
+            background-color: #e8e8e8;
+        }
+        .resetButton:active {
+            position: relative;
+            top: 1px;
+        }
+    }
+    .ServicePanel {
+        grid-area: services;
+        padding: 20px;
+        margin: 10px;
+        background-color: white;
+        -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        @include ServicePanel-layout();
+    }
+    .Pagination {
+        padding: 20px;
+        margin: 10px;
+        margin-top: 0px;
+        grid-area: pagination;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        span {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            letter-spacing: 0px;
+            word-spacing: -0.6px;
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            font-style: normal;
+            font-variant: normal;
+            text-transform: none;
+        }
+        .paginationButton {
+            background-color: #0576ff;
+            border-radius: 42px;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 19px;
+            font-weight: bold;
+            padding: 6px 9px;
+            text-decoration: none;
+            text-shadow: 0px 0px 0px #5b6178;
+            &:first-child{
+                margin-right: 5px;
+            }
+            &:last-child{
+                margin-left: 5px;
+            }
+        }
+        .paginationButton:hover {
+            background-color: #3992ff;
+        }
+        .paginationButton:active {
+            position: relative;
+            top: 1px;
+        }
+    }
+}

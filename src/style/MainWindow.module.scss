@@ -1,0 +1,37 @@
+.MainWindow {
+    background-color: rgb(224, 224, 224);
+    width: 90%;
+    height: 100%;
+    margin: auto;
+}
+
+.footer {
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    background-color: rgb(46, 46, 46);
+}
+.header {
+    width: 100%;
+    height: 40px;
+    background-color: rgb(46, 46, 46);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2{
+        text-align: center;
+        color: white;
+        margin: 10px;
+    }
+    .signIn{
+        display: flex;
+        .authorisationButton{
+            color: white;
+            border-left: solid 1px white;
+            margin: auto;
+            padding: 5px;
+        }
+    }
+
+}

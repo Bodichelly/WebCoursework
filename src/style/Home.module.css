@@ -1,0 +1,116 @@
+.Home {
+  display: flex;
+  flex-direction: column;
+}
+
+.Home .wrapper {
+  margin: 2px;
+  padding: 15px;
+  background-color: white;
+  color: dimgray;
+}
+
+.Home .wrapper:first-child {
+  margin: 0;
+  padding: 0;
+}
+
+.Home .wrapper:first-child .sliderElement {
+  width: 100%;
+  position: relative;
+}
+
+.Home .wrapper:first-child .sliderElement .sliderImg {
+  margin: auto;
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 1800px) {
+  .Home .wrapper:first-child .sliderElement .sliderImg {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .Home .wrapper:first-child .sliderElement .sliderImg {
+    height: 250px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .Home .wrapper:first-child .sliderElement .sliderImg {
+    height: 150px;
+  }
+}
+
+.Home .wrapper:first-child .sliderElement .prev,
+.Home .wrapper:first-child .sliderElement .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.Home .wrapper:first-child .sliderElement .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.Home .wrapper:first-child .sliderElement .prev {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.Home .wrapper:first-child .sliderElement .prev:hover,
+.Home .wrapper:first-child .sliderElement .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.Home .wrapper h3 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #5f5f5f;
+}
+
+.Home .wrapper h2 {
+  color: #5e5d5d;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.Home .wrapper .servicesWraper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home .wrapper .servicesWraper .service {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.Home .wrapper .servicesWraper .service img {
+  width: 40px;
+  margin: 5px;
+}
+
+.Home .wrapper .servicesWraper .service span {
+  margin: 5px;
+  text-align: center;
+}

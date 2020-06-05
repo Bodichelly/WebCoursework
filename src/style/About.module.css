@@ -1,0 +1,110 @@
+.wrapper {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .card {
+  width: 50vw;
+  height: 30vw;
+  position: relative;
+  perspective: 1000px;
+  border: 1px solid #fff;
+}
+
+@media screen and (max-width: 400px) {
+  .wrapper .card {
+    width: 85vw;
+    height: 60vw;
+  }
+}
+
+.wrapper .card .front,
+.wrapper .card .back {
+  position: absolute;
+  width: 50vw;
+  height: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+  backface-visibility: hidden;
+  background-color: white;
+}
+
+@media screen and (max-width: 400px) {
+  .wrapper .card .front,
+.wrapper .card .back {
+    width: 85vw;
+    height: 60vw;
+  }
+}
+
+.wrapper .card .front {
+  width: 50vw;
+  height: 30vw;
+}
+
+@media screen and (max-width: 400px) {
+  .wrapper .card .front {
+    width: 85vw;
+    height: 60vw;
+  }
+}
+
+.wrapper .card .front img {
+  width: 50vw;
+  height: 30vw;
+}
+
+@media screen and (max-width: 400px) {
+  .wrapper .card .front img {
+    width: 85vw;
+    height: 60vw;
+  }
+}
+
+.wrapper .card .back {
+  width: 50vw;
+  height: 30vw;
+  transform: rotateY(180deg);
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  justify-items: center;
+}
+
+@media screen and (max-width: 400px) {
+  .wrapper .card .back {
+    width: 85vw;
+    height: 60vw;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .wrapper .card .back {
+    font-size: 0.8em;
+  }
+}
+
+.wrapper .card .back span {
+  overflow: auto;
+  align-self: center;
+  text-align: center;
+  margin: auto;
+  padding-right: 10px;
+}
+
+.card:hover .front {
+  transform: rotateY(180deg);
+}
+
+.card:hover .back {
+  transform: rotateY(360deg);
+}

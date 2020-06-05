@@ -1,0 +1,68 @@
+@mixin contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    @media screen and (max-width: 1200px) {
+        grid-template-columns: 1fr;
+    }
+}
+.mapWrapper {
+    position: relative;
+    
+    margin: auto;
+    width: 70vw;
+    height: 60vh;
+}
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    .contact {
+        padding: 15px;
+        margin: 20px;
+
+        @include contact-layout();
+        -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+        .image {
+            img {
+                width: 130px;
+            }
+        }
+        .info {
+            font-size: 20px;
+            text-decoration: none;
+            color: #363636;
+            text-align: center;
+            font-weight: 1000;
+            line-height: 40px;
+            address {
+                display: flex;
+                flex-direction: column;
+                span {
+                    text-decoration: none;
+                    color: #363636;
+                    font-weight: 500;
+                    &:first-child {
+                        font-weight: 1000;
+                    }
+                }
+
+                a {
+                    text-decoration: none;
+                    color: #363636;
+                    border-top: solid 1px rgb(85, 85, 85);
+                }
+                a[href^="mailto"]::before {
+                    content: "📧 ";
+                }
+
+                a[href^="tel"]::before {
+                    content: "📞 ";
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,445 @@
+.Services {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto 40px;
+  gap: 1px 1px;
+  grid-template-areas: "filtres services services services services" "pagination pagination pagination pagination pagination";
+}
+
+@media screen and (max-width: 600px) {
+  .Services {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 40px;
+    gap: 1px 1px;
+    grid-template-areas: "filtres" "services" "pagination";
+  }
+}
+
+.Services .FilterSerchBar {
+  grid-area: filtres;
+  padding: 20px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+}
+
+.Services .FilterSerchBar .SearchBar {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  border-bottom: solid 1px #383838;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.Services .FilterSerchBar .SearchBar .searchInput {
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 15px;
+  border-width: 0px;
+  border-color: #cccccc;
+  background-color: #ffffff;
+  color: #000000;
+  border-style: solid;
+  border-radius: 21px;
+  box-shadow: 0px 0px 7px rgba(66, 66, 66, 0.48);
+  text-shadow: 0px 0px 0px rgba(66, 66, 66, 0);
+}
+
+.Services .FilterSerchBar .SearchBar .searchInput:focus {
+  outline: none;
+}
+
+.Services .FilterSerchBar .FilterBar {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  border-bottom: solid 1px #383838;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain *,
+.Services .FilterSerchBar .FilterBar .bcontain *::before,
+.Services .FilterSerchBar .FilterBar .bcontain *::after {
+  box-sizing: content-box !important;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain span {
+  line-height: 1.52;
+  font-size: 0.93rem;
+  font-family: inherit;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain {
+  display: table;
+  position: relative;
+  padding-left: 1.9rem;
+  cursor: pointer;
+  margin-bottom: 0.48rem;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input[type="checkbox"] ~ .binput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+  background: #f1f5f8;
+  transition: background 250ms;
+  border: 1px solid #b8c2cc;
+  border-radius: 0.226rem;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input[type="radio"] ~ .binput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+  background: #f1f5f8;
+  transition: background 250ms;
+  border: 1px solid #b8c2cc;
+  border-radius: 2rem;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input[type="checkbox"] ~ .binput::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 0.45rem;
+  top: 0.18rem;
+  width: 0.25rem;
+  height: 0.6rem;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transition: background 250ms;
+  transform: rotate(45deg);
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input[type="radio"] ~ .binput::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 0.25rem;
+  top: 0.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2rem;
+  background: white;
+  transition: background 250ms;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input:disabled ~ .binput::after {
+  border-color: #8795a1;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input:checked ~ .binput::after {
+  display: block;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain:hover input ~ .binput,
+.Services .FilterSerchBar .FilterBar .bcontain input:focus ~ .binput {
+  background: #e7eef3;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input:focus ~ .binput {
+  box-shadow: 0 0 0 2px rgba(52, 144, 220, 0.5);
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input:checked ~ .binput {
+  background: #0082f3;
+  border-color: #0082f3;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input[type="checkbox"]:disabled ~ .binput {
+  background: #f1f5f8;
+  border-color: #b8c2cc;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input[type="radio"]:disabled ~ .binput {
+  background: #f1f5f8;
+  border-color: #b8c2cc;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input[type="radio"]:disabled ~ .binput::after {
+  background: #8795a1;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input:checked:focus ~ .binput,
+.Services .FilterSerchBar .FilterBar .bcontain:hover input:not([disabled]):checked ~ .binput {
+  background: #0d8fff;
+  border-color: #0d8fff;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain .binput::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3rem;
+  height: 3rem;
+  margin-left: -0.85rem;
+  margin-top: -0.85rem;
+  background: #0082f3;
+  border-radius: 2rem;
+  opacity: 0.6;
+  z-index: 99999;
+  transform: scale(0);
+}
+
+@keyframes b-ripple {
+  0% {
+    transform: scale(0);
+  }
+  20% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes b-ripple-duplicate {
+  0% {
+    transform: scale(0);
+  }
+  30% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input + .binput::before {
+  animation: b-ripple 250ms ease-out;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input:checked + .binput::before {
+  animation-name: b-ripple-duplicate;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain .binput::before {
+  visibility: hidden;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain input:focus + .binput::before {
+  visibility: visible;
+}
+
+.Services .FilterSerchBar .FilterBar .bcontain:first-child .binput::before {
+  visibility: hidden;
+}
+
+.Services .FilterSerchBar .SortBar {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  border-bottom: solid 1px #383838;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.Services .FilterSerchBar .SortBar .select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.Services .FilterSerchBar .SortBar .select select {
+  font-family: "Arial";
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 6px 11px;
+  outline: 0;
+  border: 0px solid #000000;
+  border-radius: 100px;
+  background: #aac4fa;
+  color: #232323;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.Services .FilterSerchBar .SortBar .select select::-ms-expand {
+  display: none;
+}
+
+.Services .FilterSerchBar .SortBar .select select:hover,
+.Services .FilterSerchBar .SortBar .select select:focus {
+  color: #000000;
+  background: #c2cef7;
+}
+
+.Services .FilterSerchBar .SortBar .select select:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.Services .FilterSerchBar .SortBar .select_arrow {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 8px 5px 0px 5px;
+  border-color: #7b7b7b transparent transparent transparent;
+}
+
+.Services .FilterSerchBar .SortBar .select select:hover ~ .select_arrow,
+.Services .FilterSerchBar .SortBar .select select:focus ~ .select_arrow {
+  border-top-color: #000000;
+}
+
+.Services .FilterSerchBar .SortBar .select select:disabled ~ .select_arrow {
+  border-top-color: #cccccc;
+}
+
+.Services .FilterSerchBar .applyButton {
+  margin: auto;
+  background-color: #44c767;
+  border-radius: 22px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 9px 25px;
+  text-decoration: none;
+}
+
+.Services .FilterSerchBar .applyButton:hover {
+  background-color: #67db6f;
+}
+
+.Services .FilterSerchBar .applyButton:active {
+  position: relative;
+  top: 1px;
+}
+
+.Services .FilterSerchBar .resetButton {
+  margin: auto;
+  background-color: #f0f0f0;
+  border-radius: 22px;
+  display: inline-block;
+  cursor: pointer;
+  color: #262626;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 9px 14px;
+  text-decoration: none;
+}
+
+.Services .FilterSerchBar .resetButton:hover {
+  background-color: #e8e8e8;
+}
+
+.Services .FilterSerchBar .resetButton:active {
+  position: relative;
+  top: 1px;
+}
+
+.Services .ServicePanel {
+  grid-area: services;
+  padding: 20px;
+  margin: 10px;
+  background-color: white;
+  -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 600px) {
+  .Services .ServicePanel {
+    flex-direction: column;
+  }
+}
+
+.Services .Pagination {
+  padding: 20px;
+  margin: 10px;
+  margin-top: 0px;
+  grid-area: pagination;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+  box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+}
+
+.Services .Pagination span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0px;
+  word-spacing: -0.6px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+
+.Services .Pagination .paginationButton {
+  background-color: #0576ff;
+  border-radius: 42px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 19px;
+  font-weight: bold;
+  padding: 6px 9px;
+  text-decoration: none;
+  text-shadow: 0px 0px 0px #5b6178;
+}
+
+.Services .Pagination .paginationButton:first-child {
+  margin-right: 5px;
+}
+
+.Services .Pagination .paginationButton:last-child {
+  margin-left: 5px;
+}
+
+.Services .Pagination .paginationButton:hover {
+  background-color: #3992ff;
+}
+
+.Services .Pagination .paginationButton:active {
+  position: relative;
+  top: 1px;
+}
