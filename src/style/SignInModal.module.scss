@@ -1,5 +1,6 @@
 @mixin modal-content-size {
     width: 50vw;
+    min-height: 35vh;
     height: auto;
     @media screen and (max-width: 580px) {
         width: 100vw;
@@ -9,8 +10,8 @@
     // }
 }
 @mixin modal-box-size {
-    width: 60vw;
-    // min-height: 50vh;
+    width: 55vw;
+    min-height: 50vh;
     padding: 15px;
     @media screen and (max-width: 580px) {
         padding: 0px;

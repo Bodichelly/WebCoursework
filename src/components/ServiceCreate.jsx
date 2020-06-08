@@ -263,6 +263,7 @@ class ServiceCreate extends Component {
                     <p>{this.state.fileName}</p>
                 </div>
                 <div className={classes.descriptionPart}>
+                <h2>Service Description</h2>
                     <input type="text" className={classes.nameInput} value={this.state.productName} onChange={this.onProductNameInput} placeholder="Product name"></input>
                     <textarea className={classes.descriptionInput} name="description" placeholder="Product description" cols="30" rows="15" onChange={this.onDescriptionInput}></textarea>
                     <p>{this.state.errorMessage}</p>

@@ -5,7 +5,7 @@
     gap: 1px 1px;
     grid-template-areas: "filtres services services services services" "pagination pagination pagination pagination pagination";
 
-    @media screen and (max-width: 750px) {
+    @media screen and (max-width: 1000px) {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 40px;
@@ -22,7 +22,7 @@
     }
 }
 @mixin service-size {
-    width: 300px;
+    width: 400px;
     height: 400px;
     // max-height: 300px;
     // @media screen and (max-width: 900px) {
@@ -272,6 +272,9 @@
         grid-area: filtres;
         padding: 20px;
         margin: 10px;
+        max-height: 500px;
+        min-width: 300px;
+        overflow: auto;
         display: flex;
         flex-wrap: wrap;
         background-color: white;
@@ -445,8 +448,8 @@
             box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
             @include service-size();
             .serviceImage {
-                width: 100px;
-                height: 100px;
+                width: 200px;
+                height: 200px;
                 object-fit: cover;
             }
             .serviceName {

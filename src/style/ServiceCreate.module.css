@@ -32,12 +32,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 300px;
+  max-height: 500px;
+  overflow: auto;
   padding: 20px;
   margin: 10px;
   width: 25%;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
   .servicecreate .settingPart {
     width: 100%;
   }
@@ -192,7 +195,7 @@
   margin: 10px;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
   .servicecreate .descriptionPart {
     width: 100%;
   }

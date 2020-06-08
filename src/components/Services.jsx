@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { db } from "../services/firebase"
 import classes from "./../style/Services.module.css";
 import serviceImg from "../pictures/serviceDefaultImg.png"
+import ServiceModal from "./ServiceModal"
 
 function CheckBox({ el, onChange }) {
   return (
@@ -86,9 +87,11 @@ class Services extends Component {
       selectedSortType: "default",
       searchStr: "",
       defaulSelected: true,
-
+      showServiceModal: false,
       currenPage: 1,
       allPages: 0,
+      selectedServiceName:"",
+      selectedServiceDescription: "",
       servicesHtml: [],
       services: [],
 
@@ -104,31 +107,55 @@ class Services extends Component {
     this.serviceClick = this.serviceClick.bind(this);
     this.applyChanges = this.applyChanges.bind(this);
     this.changePage = this.changePage.bind(this);
+
+    this.close = this.close.bind(this);
   }
-  component
+  close(){
+    this.setState({
+      showServiceModal: false,
+    })
+  }
   // Math.ceil(services.length/5)
   changePage(event) {
     if (event.target.id === "next") {
       console.log("next");
       if (this.state.currenPage < this.state.allPages) {
         this.setState({
-          currenPage: this.state.currenPage + 1,
+          currenPage: this.state.currenPage +1,
+        }, ()=>{ 
+          this.setState({
+            servicesHtml: this.setServicesHtml(this.state.services),
+          });
         })
       }
     } else {
       console.log("prev");
       if (this.state.currenPage > 1) {
         this.setState({
-          currenPage: this.state.currenPage + -1,
+          currenPage: this.state.currenPage -1,
+        }, ()=>{ 
+          this.setState({
+            servicesHtml: this.setServicesHtml(this.state.services),
+          });
         })
       }
     }
   }
   applyChanges() {
-    this.getServices();
+    this.setState({
+      currenPage: 1,
+    },
+    ()=> {this.getServices();}
+    )
+    
   }
   serviceClick(id) {
-    console.log(id);
+    let service = this.state.services.find( el => el.id===id);
+    this.setState({
+      selectedServiceName: service.name,
+      selectedServiceDescription: service.description,
+      showServiceModal: true
+    });
   }
   dynamicSort(property) {
     if (property == "default") {
@@ -273,6 +300,7 @@ class Services extends Component {
   render() {
     return (
       <div className={classes.Services}>
+        {this.state.showServiceModal ? <ServiceModal close={this.close} name={this.state.selectedServiceName}  description={this.state.selectedServiceDescription}  /> : null}
         <div className={classes.FilterSerchBar}>
           <h2>{this.state.servicesType}</h2>
           <div className={classes.SearchBar}>

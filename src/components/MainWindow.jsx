@@ -5,6 +5,7 @@ import Home from "./Home";
 import About from "./About";
 import Contacts from "./Contacts";
 import Services from "./Services";
+import Photos from "./Photos"
 import ScrollUpButton from "react-scroll-up-button";
 import { Route, BrowserRouter } from "react-router-dom";
 import { Redirect } from "react-router-dom";
@@ -39,6 +40,7 @@ class MainWindow extends Component {
         <Route key="rent" path="/rent" servicesType="rent" component={()=><Services servicesType="rent" />} />,
         <Route key="sale" path="/sale" servicesType="sale" component={()=><Services servicesType="sale" />} />,
         <Route key="contacts" path="/contacts" component={Contacts} />,
+        <Route key="photos" path="/photos" component={Photos} />,
       ],
     };
 

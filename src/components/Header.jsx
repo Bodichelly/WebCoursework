@@ -48,8 +48,8 @@ class Header extends Component {
               Contacts
             </NavLink>
 
-            <NavLink className={classes.Navlink} to="#">
-              Page 5
+            <NavLink className={classes.Navlink} to="/photos">
+              Photos
             </NavLink>
           </nav>
         </div>

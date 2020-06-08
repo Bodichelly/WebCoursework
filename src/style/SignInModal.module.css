@@ -21,7 +21,8 @@
 .modalContainer .modalBox {
   background-image: url("../pictures/signinImg.jpg");
   margin: auto;
-  width: 60vw;
+  width: 55vw;
+  min-height: 50vh;
   padding: 15px;
   border-radius: 30px;
   display: flex;
@@ -39,6 +40,7 @@
 
 .modalContainer .modalBox .modalContent {
   width: 50vw;
+  min-height: 35vh;
   height: auto;
   padding: 10px;
   padding-top: 30px;
