@@ -1,0 +1,253 @@
+.servicecreate {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.servicecreate .headingPart {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 10px;
+}
+
+.servicecreate .headingPart h2 {
+  color: #3a3a3a;
+  font-size: 35px;
+}
+
+.servicecreate .headingPart p {
+  color: #4d4d4d;
+  font-size: 25px;
+}
+
+.servicecreate .settingPart {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 10px;
+  width: 25%;
+}
+
+@media screen and (max-width: 1100px) {
+  .servicecreate .settingPart {
+    width: 100%;
+  }
+}
+
+.servicecreate .settingPart .select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.servicecreate .settingPart .select select {
+  font-family: "Arial";
+  display: inline-block;
+  width: 100%;
+  min-width: 200px;
+  cursor: pointer;
+  padding: 6px 11px;
+  outline: 0;
+  border: 0px solid #000000;
+  border-radius: 100px;
+  background: #aac4fa;
+  color: #232323;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.servicecreate .settingPart .select select::-ms-expand {
+  display: none;
+}
+
+.servicecreate .settingPart .select select:hover,
+.servicecreate .settingPart .select select:focus {
+  color: #000000;
+  background: #c2cef7;
+}
+
+.servicecreate .settingPart .select select:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.servicecreate .settingPart .select_arrow {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 8px 5px 0px 5px;
+  border-color: #7b7b7b transparent transparent transparent;
+}
+
+.servicecreate .settingPart .select select:hover ~ .select_arrow,
+.servicecreate .settingPart .select select:focus ~ .select_arrow {
+  border-top-color: #000000;
+}
+
+.servicecreate .settingPart .select select:disabled ~ .select_arrow {
+  border-top-color: #cccccc;
+}
+
+.servicecreate .settingPart .imgUrlInput {
+  width: 90%;
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 15px;
+  border-width: 0px;
+  border-color: #cccccc;
+  background-color: #ffffff;
+  color: #000000;
+  border-style: solid;
+  border-radius: 21px;
+  box-shadow: 0px 0px 7px rgba(66, 66, 66, 0.48);
+  text-shadow: 0px 0px 0px rgba(66, 66, 66, 0);
+}
+
+.servicecreate .settingPart .imgUrlInput:focus {
+  outline: none;
+}
+
+.servicecreate .settingPart .fileInput {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.servicecreate .settingPart .fileInput .imgFileInputLabel {
+  color: #4d4d4d;
+  font-size: 15px;
+  grid-area: label;
+  text-align: center;
+}
+
+.servicecreate .settingPart .fileInput input[type="file"] {
+  display: none;
+}
+
+.servicecreate .settingPart .fileInput .imgFileInput {
+  margin: auto;
+  background-color: #44c767;
+  border-radius: 22px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 9px 25px;
+  text-decoration: none;
+}
+
+.servicecreate .settingPart .fileInput .imgFileInput:hover {
+  background-color: #67db6f;
+}
+
+.servicecreate .settingPart .fileInput .imgFileInputClear {
+  grid-area: clear;
+  width: 25px;
+  height: 15px;
+  margin: 5px;
+  background-color: #e4685d;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 6px 15px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.servicecreate .settingPart .fileInput .imgFileInputClear:hover {
+  background-color: #cfcfcf;
+  color: #4d4d4d;
+}
+
+.servicecreate .descriptionPart {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  margin: 10px;
+}
+
+@media screen and (max-width: 1100px) {
+  .servicecreate .descriptionPart {
+    width: 100%;
+  }
+}
+
+.servicecreate .descriptionPart .nameInput {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 8px;
+  font-size: 15px;
+  border-width: 0px;
+  border-color: #cccccc;
+  background-color: #ffffff;
+  color: #000000;
+  border-style: solid;
+  border-radius: 21px;
+  box-shadow: 0px 0px 7px rgba(66, 66, 66, 0.48);
+  text-shadow: 0px 0px 0px rgba(66, 66, 66, 0);
+}
+
+.servicecreate .descriptionPart .nameInput:focus {
+  outline: none;
+}
+
+.servicecreate .descriptionPart .descriptionInput {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  width: 50vw;
+  height: 45vh;
+  padding: 10px;
+}
+
+.servicecreate .descriptionPart p {
+  color: red;
+}
+
+.servicecreate .descriptionPart .applyButton {
+  margin: auto;
+  margin-top: 10px;
+  background-color: #44c767;
+  border-radius: 22px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 9px 25px;
+  text-decoration: none;
+}
+
+.servicecreate .descriptionPart .applyButton:hover {
+  background-color: #67db6f;
+}
+
+.servicecreate .descriptionPart .applyButton:active {
+  position: relative;
+  top: 1px;
+}

@@ -1,8 +1,38 @@
+@mixin modal-content-size {
+    width: 50vw;
+    height: auto;
+    @media screen and (max-width: 580px) {
+        width: 100vw;
+    }
+    // @media screen and (max-width: 450px) {
+    //     width: 100vw;
+    // }
+}
+@mixin modal-box-size {
+    width: 60vw;
+    // min-height: 50vh;
+    padding: 15px;
+    @media screen and (max-width: 580px) {
+        padding: 0px;
+        width: 90vw;
+        // height: 100vh;
+        background-image: none;
+    }
+}
+@mixin modal-content-buttons-layout {
+    flex-direction: row;
+    @media screen and (max-width: 450px) {
+        flex-direction: column;
+    }
+}
+
 .modalContainer {
-    display: block; /* Hidden by default */
+    display: flex; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    // padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -13,18 +43,90 @@
     .modalBox {
         background-image: url("../pictures/signinImg.jpg");
         margin: auto;
-        padding: 20px;
-        width: 60vw;
-        min-height: 50vh;
-        border: 1px solid rgb(0, 0, 0);
+        // padding: 15px;
+        @include modal-box-size();
         border-radius: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
-        .modalContent{
+        .modalContent {
+            @include modal-content-size();
             
+            padding: 10px;
+            padding-top: 30px;
+            padding-bottom: 30px;
             background-color: white;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .signinInput {
+                
+                padding: 8px;
+                font-size: 15px;
+                border-width: 0px;
+                border-color: #cccccc;
+                background-color: #ffffff;
+                color: #000000;
+                border-style: solid;
+                border-radius: 21px;
+                box-shadow: 0px 0px 7px rgba(66, 66, 66, 0.48);
+                text-shadow: 0px 0px 0px rgba(66, 66, 66, 0);
+            }
+            .signinInput:focus {
+                outline: none;
+            }
+            p{
+                font-size: 20px;
+            }
+            .errorMessage {
+                margin-top: 10px;
+                color: red;
+                font-size: 15px;
+            }
+            .applyButton {
+                margin: auto;
+                background-color: #221edf;
+                border-radius: 22px;
+                display: inline-block;
+                cursor: pointer;
+                color: #ffffff;
+                font-family: Arial;
+                font-size: 20px;
+                padding: 9px 25px;
+                text-decoration: none;
+            }
+            .applyButton:hover {
+                background-color: #4c76ff;
+            }
+            .applyButton:active {
+                position: relative;
+                top: 1px;
+            }
+            .buttons {
+                margin-top: 10px;
+                display: flex;
+                @include modal-content-buttons-layout();
+            }
+            .cancelButton {
+                margin: auto;
+                background-color: white;
+                // border-radius: 22px;
+                display: inline-block;
+                cursor: pointer;
+                color: #262626;
+                font-family: Arial;
+                font-size: 20px;
+                padding: 9px 14px;
+                text-decoration: none;
+            }
+            .cancelButton:hover {
+                text-decoration: underline;
+            }
+            .cancelButton:active {
+                position: relative;
+                top: 1px;
+            }
         }
     }
 }

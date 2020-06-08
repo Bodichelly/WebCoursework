@@ -1,12 +1,12 @@
 .modalContainer {
-  display: block;
+  display: flex;
   /* Hidden by default */
+  align-items: center;
+  justify-content: center;
   position: fixed;
   /* Stay in place */
   z-index: 1;
   /* Sit on top */
-  padding-top: 100px;
-  /* Location of the box */
   left: 0;
   top: 0;
   width: 100%;
@@ -21,17 +21,119 @@
 .modalContainer .modalBox {
   background-image: url("../pictures/signinImg.jpg");
   margin: auto;
-  padding: 20px;
   width: 60vw;
-  min-height: 50vh;
-  border: 1px solid black;
+  padding: 15px;
   border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+@media screen and (max-width: 580px) {
+  .modalContainer .modalBox {
+    padding: 0px;
+    width: 90vw;
+    background-image: none;
+  }
+}
+
 .modalContainer .modalBox .modalContent {
+  width: 50vw;
+  height: auto;
+  padding: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   background-color: white;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 580px) {
+  .modalContainer .modalBox .modalContent {
+    width: 100vw;
+  }
+}
+
+.modalContainer .modalBox .modalContent .signinInput {
+  padding: 8px;
+  font-size: 15px;
+  border-width: 0px;
+  border-color: #cccccc;
+  background-color: #ffffff;
+  color: #000000;
+  border-style: solid;
+  border-radius: 21px;
+  box-shadow: 0px 0px 7px rgba(66, 66, 66, 0.48);
+  text-shadow: 0px 0px 0px rgba(66, 66, 66, 0);
+}
+
+.modalContainer .modalBox .modalContent .signinInput:focus {
+  outline: none;
+}
+
+.modalContainer .modalBox .modalContent p {
+  font-size: 20px;
+}
+
+.modalContainer .modalBox .modalContent .errorMessage {
+  margin-top: 10px;
+  color: red;
+  font-size: 15px;
+}
+
+.modalContainer .modalBox .modalContent .applyButton {
+  margin: auto;
+  background-color: #221edf;
+  border-radius: 22px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 9px 25px;
+  text-decoration: none;
+}
+
+.modalContainer .modalBox .modalContent .applyButton:hover {
+  background-color: #4c76ff;
+}
+
+.modalContainer .modalBox .modalContent .applyButton:active {
+  position: relative;
+  top: 1px;
+}
+
+.modalContainer .modalBox .modalContent .buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 450px) {
+  .modalContainer .modalBox .modalContent .buttons {
+    flex-direction: column;
+  }
+}
+
+.modalContainer .modalBox .modalContent .cancelButton {
+  margin: auto;
+  background-color: white;
+  display: inline-block;
+  cursor: pointer;
+  color: #262626;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 9px 14px;
+  text-decoration: none;
+}
+
+.modalContainer .modalBox .modalContent .cancelButton:hover {
+  text-decoration: underline;
+}
+
+.modalContainer .modalBox .modalContent .cancelButton:active {
+  position: relative;
+  top: 1px;
 }

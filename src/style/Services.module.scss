@@ -5,7 +5,7 @@
     gap: 1px 1px;
     grid-template-areas: "filtres services services services services" "pagination pagination pagination pagination pagination";
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 750px) {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 40px;
@@ -21,7 +21,17 @@
         flex-direction: column;
     }
 }
-
+@mixin service-size {
+    width: 300px;
+    height: 400px;
+    // max-height: 300px;
+    // @media screen and (max-width: 900px) {
+    //     width: 250px;
+    // }
+    // @media screen and (max-width: 700px) {
+    //     width: 150px;
+    // }
+}
 @mixin CheckBoxStyle {
     .bcontain *,
     .bcontain *::before,
@@ -268,7 +278,15 @@
         -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
         -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
         box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
-
+        h2{
+            text-transform: capitalize;
+            padding-bottom: 10px;
+            margin: auto;
+            text-align: center;
+            width: 100%;
+            border-bottom: solid 1px rgb(56, 56, 56);
+            margin-bottom: 10px;
+        }
         .SearchBar {
             display: flex;
             flex-direction: column;
@@ -406,11 +424,39 @@
         grid-area: services;
         padding: 20px;
         margin: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
         background-color: white;
         -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
         -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
         box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
         @include ServicePanel-layout();
+        .serviceContainer {
+            display: flex;
+            flex-direction: column;
+            margin: 5px;
+            align-items: center;
+            justify-content: center;
+            -webkit-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+            -moz-box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+            box-shadow: -3px 13px 22px -4px rgba(0, 0, 0, 0.27);
+            @include service-size();
+            .serviceImage {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+            }
+            .serviceName {
+                text-align: center;
+                padding: 5px;
+                color: rgb(77, 77, 77);
+                font-size: 25px;
+                word-wrap: normal;
+            }
+        }
     }
     .Pagination {
         padding: 20px;
@@ -450,10 +496,10 @@
             padding: 6px 9px;
             text-decoration: none;
             text-shadow: 0px 0px 0px #5b6178;
-            &:first-child{
+            &:first-child {
                 margin-right: 5px;
             }
-            &:last-child{
+            &:last-child {
                 margin-left: 5px;
             }
         }

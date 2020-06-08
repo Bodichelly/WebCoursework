@@ -1,0 +1,244 @@
+@mixin file-input-layout {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "label label" "fileinput clear";
+    @media screen and (max-width: 600px) {
+        
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: "label" "fileinput" "clear";
+    }
+}
+@mixin input-parts-width {
+    @media screen and (max-width: 1100px) {
+        width: 100%;
+    }
+}
+.servicecreate {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .headingPart {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        margin: 10px;
+        
+        h2 {
+            color: rgb(58, 58, 58);
+            font-size: 35px;
+        }
+        p {
+            color: rgb(77, 77, 77);
+            font-size: 25px;
+        }
+    }
+    .settingPart {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        padding: 20px;
+        margin: 10px;
+        width: 25%;
+        @include input-parts-width();
+        .select {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        .select select {
+            font-family: "Arial";
+            display: inline-block;
+            width: 100%;
+            min-width: 200px;
+            cursor: pointer;
+            padding: 6px 11px;
+            outline: 0;
+            border: 0px solid #000000;
+            border-radius: 100px;
+            background: #aac4fa;
+            color: #232323;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .select select::-ms-expand {
+            display: none;
+        }
+        .select select:hover,
+        .select select:focus {
+            color: #000000;
+            background: #c2cef7;
+        }
+        .select select:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .select_arrow {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            pointer-events: none;
+            border-style: solid;
+            border-width: 8px 5px 0px 5px;
+            border-color: #7b7b7b transparent transparent transparent;
+        }
+        .select select:hover ~ .select_arrow,
+        .select select:focus ~ .select_arrow {
+            border-top-color: #000000;
+        }
+        .select select:disabled ~ .select_arrow {
+            border-top-color: #cccccc;
+        }
+        .imgUrlInput {
+            width: 90%;
+            margin-top: 10px;
+            padding: 8px;
+            font-size: 15px;
+            border-width: 0px;
+            border-color: #cccccc;
+            background-color: #ffffff;
+            color: #000000;
+            border-style: solid;
+            border-radius: 21px;
+            box-shadow: 0px 0px 7px rgba(66, 66, 66, 0.48);
+            text-shadow: 0px 0px 0px rgba(66, 66, 66, 0);
+        }
+        .imgUrlInput:focus {
+            outline: none;
+        }
+        .fileInput {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+        justify-content: center;
+            .imgFileInputLabel {
+                color: rgb(77, 77, 77);
+                font-size: 15px;
+                grid-area: label;
+                text-align: center;
+            }
+            input[type="file"] {
+                display: none;
+            }
+            .imgFileInput {
+                margin: auto;
+                
+                background-color: #44c767;
+                border-radius: 22px;
+                display: inline-block;
+                cursor: pointer;
+                color: #ffffff;
+                font-family: Arial;
+                font-size: 15px;
+                padding: 9px 25px;
+                text-decoration: none;
+            }
+            .imgFileInput:hover {
+                background-color: #67db6f;
+            }
+            
+            
+            .imgFileInputClear {
+                
+                grid-area: clear;
+                width: 25px;
+                height: 15px;
+                margin: 5px;
+                // box-shadow: inset 0px 39px 0px -24px #e67a73;
+                background-color: #e4685d;
+                border-radius: 4px;
+                border: 1px solid #ffffff;
+                display: inline-block;
+                cursor: pointer;
+                color: #ffffff;
+                font-family: Arial;
+                font-size: 15px;
+                padding: 6px 15px;
+                text-decoration: none;
+                // text-shadow: 0px 1px 0px #b23e35;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .imgFileInputClear:hover {
+                background-color: #cfcfcf;
+                color: rgb(77, 77, 77);
+            }
+            // .imgFileInputClear:active {
+            //     position: relative;
+            //     top: 1px;
+            // }
+        }
+    }
+    .descriptionPart{
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        @include input-parts-width();
+        padding: 30px;
+        margin: 10px;
+        .nameInput {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            font-size: 15px;
+            border-width: 0px;
+            border-color: #cccccc;
+            background-color: #ffffff;
+            color: #000000;
+            border-style: solid;
+            border-radius: 21px;
+            box-shadow: 0px 0px 7px rgba(66, 66, 66, 0.48);
+            text-shadow: 0px 0px 0px rgba(66, 66, 66, 0);
+        }
+        .nameInput:focus {
+            outline: none;
+        }
+        .descriptionInput{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            width: 50vw;
+            height: 45vh;
+            padding: 10px;
+        }
+        p{
+            color: red;
+        }
+        .applyButton {
+            margin: auto;
+            margin-top: 10px;
+            background-color: #44c767;
+            border-radius: 22px;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 20px;
+            padding: 9px 25px;
+            text-decoration: none;
+        }
+        .applyButton:hover {
+            background-color: #67db6f;
+        }
+        .applyButton:active {
+            position: relative;
+            top: 1px;
+        }
+    }
+}

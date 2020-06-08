@@ -21,6 +21,11 @@
   justify-content: space-between;
 }
 
+.header p {
+  color: white;
+  margin-right: 5px;
+}
+
 .header h2 {
   text-align: center;
   color: white;

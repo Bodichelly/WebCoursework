@@ -4,6 +4,7 @@ import classes from "./../style/Header.module.css";
 import headerImg from "./../pictures/headerImg.jpg";
 
 class Header extends Component {
+  
   render() {
     return (
       <header>
@@ -28,15 +29,18 @@ class Header extends Component {
             <span className={classes.Navlink} to="#">
               Services
               <div className={classes.dropdownContent}>
-                <NavLink  className={classes.Navlink} to="/services">
+                <NavLink  className={classes.Navlink} to="/repair">
                   Repair
                 </NavLink>
-                <NavLink  className={classes.Navlink} to="/services">
+                <NavLink  className={classes.Navlink} to="/rent">
                   Rent
                 </NavLink>
-                <NavLink  className={classes.Navlink} to="/services">
+                <NavLink  className={classes.Navlink} to="/sale">
                   Sale
                 </NavLink>
+                { this.props.isLogged ? <NavLink  className={classes.Navlink} to="/servicecreate">
+                  New
+                </NavLink>: null}
               </div>
             </span>
 

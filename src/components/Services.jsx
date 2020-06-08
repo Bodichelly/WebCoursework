@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
+import { db } from "../services/firebase"
 import classes from "./../style/Services.module.css";
+import serviceImg from "../pictures/serviceDefaultImg.png"
 
 function CheckBox({ el, onChange }) {
   return (
@@ -35,49 +36,187 @@ class Services extends Component {
     this.state = {
       checkboxes: [
         {
-          id: "1id",
-          label: "first",
           isChecked: false,
+          id: "engine",
+          label: "Engine"
         },
         {
-          id: "2id",
-          label: "second",
-          isChecked: true,
+
+          isChecked: false,
+          id: "filter",
+          label: "Filter"
         },
         {
-          id: "3id",
-          label: "third",
+
           isChecked: false,
+          id: "generator",
+          label: "Generator"
+        },
+        {
+
+          isChecked: false,
+          id: "illuminator",
+          label: "Lighting Equipment"
+        },
+        {
+
+          isChecked: false,
+          id: "hydraulic",
+          label: "Hydraulic Equipment"
+        },
+        {
+
+          isChecked: false,
+          id: "motopump",
+          label: "Motor Pump"
+        },
+        {
+
+          isChecked: false,
+          id: "grindingwheel",
+          label: "Grinding Wheel"
+        },
+        {
+
+          isChecked: false,
+          id: "coredrill",
+          label: "Core Drill"
         },
       ],
       selectedSortType: "default",
       searchStr: "",
       defaulSelected: true,
+
       currenPage: 1,
       allPages: 0,
+      servicesHtml: [],
+      services: [],
+
+      servicesType: this.props.servicesType,
+      message: "Services not found",
     };
     this.checkboxChanged = this.checkboxChanged.bind(this);
     this.updateSearchStr = this.updateSearchStr.bind(this);
     this.resetFiltres = this.resetFiltres.bind(this);
     this.selectChanged = this.selectChanged.bind(this);
+    this.getServices = this.getServices.bind(this);
+    this.setServicesHtml = this.setServicesHtml.bind(this);
+    this.serviceClick = this.serviceClick.bind(this);
+    this.applyChanges = this.applyChanges.bind(this);
+    this.changePage = this.changePage.bind(this);
   }
-  selectChanged(event){
+  component
+  // Math.ceil(services.length/5)
+  changePage(event) {
+    if (event.target.id === "next") {
+      console.log("next");
+      if (this.state.currenPage < this.state.allPages) {
+        this.setState({
+          currenPage: this.state.currenPage + 1,
+        })
+      }
+    } else {
+      console.log("prev");
+      if (this.state.currenPage > 1) {
+        this.setState({
+          currenPage: this.state.currenPage + -1,
+        })
+      }
+    }
+  }
+  applyChanges() {
+    this.getServices();
+  }
+  serviceClick(id) {
+    console.log(id);
+  }
+  dynamicSort(property) {
+    if (property == "default") {
+      return (a, b) => { return 0; }
+    }
+    return function (a, b) {
+      let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+      return result;
+    }
+  }
+  setServicesHtml(services) {
+
+    return services.slice((this.state.currenPage - 1) * 5, 5 + (this.state.currenPage - 1) * 5).sort(this.dynamicSort(this.state.selectedSortType)).map((el) => {
+      return (
+        <div key={el.id} className={classes.serviceContainer} onClick={() => { this.serviceClick(el.id) }}>
+          {el.image.length > 0 ? <img src={el.image} className={classes.serviceImage} alt="" /> :
+            <img src={serviceImg} className={classes.serviceImage} alt="" />
+          }
+          <p className={classes.serviceName}>{el.name}</p>
+        </div>
+      )
+    })
+
+  }
+  async getServices() {
+    console.log(this.props.servicesType);
+    try {
+      db.ref("/" + this.props.servicesType).on("value", snapshot => {
+        let services_ = [];
+        if (!snapshot.val()) {
+
+          return;
+        }
+        Object.values(snapshot.val()).forEach((snap) => {
+          const selectedFilters = this.state.checkboxes.filter(el => el.isChecked === true).map(el => {
+            return el.id;
+          });
+          if (selectedFilters.length > 0) {
+
+            if (selectedFilters.includes(snap.type)) {
+              if (new RegExp(this.state.searchStr.replace(/\s/g, '|')).test(snap.name)) {
+                services_.push(snap);
+              } else if (new RegExp(this.state.searchStr.replace(/\s/g, '|')).test(snap.description)) {
+                services_.push(snap);
+              }
+            }
+          } else {
+            if (new RegExp(this.state.searchStr.replace(/\s/g, '|')).test(snap.name)) {
+              services_.push(snap);
+            } else if (new RegExp(this.state.searchStr.replace(/\s/g, '|')).test(snap.description)) {
+              services_.push(snap);
+            }
+          }
+
+
+        });
+        console.log(services_);
+        this.setState({
+          services: services_,
+          servicesHtml: this.setServicesHtml(services_),
+          allPages: Math.ceil(services_.length / 5),
+        });
+      });
+
+    } catch (error) {
+      this.setState({ message: error.message });
+    }
+  }
+  async componentDidMount() {
+    this.getServices();
+  }
+  selectChanged(event) {
 
     console.log(event.target.value);
     this.setState({
       selectedSortType: event.target.value,
       defaulSelected: false,
     });
-    
+
   }
-  resetFiltres(){
+  resetFiltres() {
     this.setState({
       searchStr: "",
     });
     let newCheckboxArray = [...this.state.checkboxes];
     let index = 0;
     for (let i = 0; i < newCheckboxArray.length; i++) {
-      newCheckboxArray[i].isChecked=false;
+      newCheckboxArray[i].isChecked = false;
     }
 
     this.setState({
@@ -88,7 +227,7 @@ class Services extends Component {
       defaulSelected: true,
     });
   }
-  updateSearchStr(event){
+  updateSearchStr(event) {
     this.setState({
       searchStr: event.target.value,
     });
@@ -117,9 +256,7 @@ class Services extends Component {
       checkboxes: newCheckboxArray,
     });
   }
-  componentDidUpdate() {
-    console.log(this.state.checkboxes);
-  }
+
   // componentDidMount() {
   //   this.setState((prevState) => ({
   //     checkboxesHTML: prevState.checkboxes.map((el) => {
@@ -137,6 +274,7 @@ class Services extends Component {
     return (
       <div className={classes.Services}>
         <div className={classes.FilterSerchBar}>
+          <h2>{this.state.servicesType}</h2>
           <div className={classes.SearchBar}>
             <label htmlFor="searchStr">Search</label>
             <input
@@ -160,25 +298,27 @@ class Services extends Component {
               <select onChange={this.selectChanged}>
                 <option value="default" selected={this.state.defaulSelected}>Default</option>
                 <option value="type" >By Type</option>
-                <option value="name" >By Company Name</option>
+                <option value="name" >By Name</option>
               </select>
               <div className={classes.select_arrow}></div>
             </div>
           </div>
-          <a href="#" className={classes.applyButton}>
+          <a className={classes.applyButton} onClick={this.applyChanges}>
             Apply
           </a>
-          <a href="#" onClick={this.resetFiltres} className={classes.resetButton}>
+          <a onClick={this.resetFiltres} className={classes.resetButton}>
             Reset
           </a>
         </div>
-        <div className={classes.ServicePanel}></div>
-        <div className={classes.Pagination}>
-        <a href="#" className={classes.paginationButton}>
+        <div className={classes.ServicePanel}>
+          {this.state.servicesHtml.length > 0 ? this.state.servicesHtml : this.state.message}
+        </div>
+        <div className={classes.Pagination} onClick={this.changePage}>
+          <a id="prev" className={classes.paginationButton}>
             Prev
           </a>
-    <span>{this.state.currenPage}/{this.state.allPages}</span>
-          <a href="#" className={classes.paginationButton}>
+          <span>{this.state.currenPage}/{this.state.allPages}</span>
+          <a id="next" className={classes.paginationButton}>
             Next
           </a>
         </div>
