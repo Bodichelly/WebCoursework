@@ -15,7 +15,7 @@ class Contacts extends Component {
       height: "50vh",
     };
     return (
-      <div className={classes.Home}>
+      <div className={classes.Home} onError={()=>{alert(`Loading image error`)}}>
         <div className={classes.wrapper}>
           {/* <img src={EraImg} className={classes.sliderImg} alt="" /> */}
         </div>
@@ -26,7 +26,7 @@ class Contacts extends Component {
           <div className={contactClasses.wrapper}>
             <div className={contactClasses.contact}>
               <div className={contactClasses.image}>
-                <img src={defaulContactImg} alt="" />
+                <img src={defaulContactImg} alt="Contact Image" />
               </div>
               <div className={contactClasses.info}>
                 <address>
@@ -41,7 +41,7 @@ class Contacts extends Component {
             </div>
             <div className={contactClasses.contact}>
               <div className={contactClasses.image}>
-                <img src={defaulContactImg} alt="" />
+                <img src={defaulContactImg} alt="Contact Image" />
               </div>
               <div className={contactClasses.info}>
                 <address>
@@ -56,7 +56,7 @@ class Contacts extends Component {
             </div>
             <div className={contactClasses.contact}>
               <div className={contactClasses.image}>
-                <img src={defaulContactImg} alt="" />
+                <img src={defaulContactImg} alt="Contact Image" />
               </div>
               <div className={contactClasses.info}>
                 <address>

@@ -61,14 +61,14 @@ class Home extends Component {
 
   render() {
     return (
-      <div className={classes.Home}>
+      <div className={classes.Home} onError={()=>{alert(`Loading image error`)}}>
         <div className={classes.wrapper}>
           
           <div className={classes.sliderElement}>
           <img
             src={this.state.curentSlideImg}
             className={classes.sliderImg}
-            alt=""
+            alt="Slider Image"
           />
           <div  className={classes.prev} onClick={this.prevClicked}>&#10094;</div>
           <div  className={classes.next} onClick={this.nextClicked}>&#10095;</div>

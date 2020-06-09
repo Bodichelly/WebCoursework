@@ -3,6 +3,7 @@ import { db } from "../services/firebase"
 import classes from "./../style/Services.module.css";
 import serviceImg from "../pictures/serviceDefaultImg.png"
 import ServiceModal from "./ServiceModal"
+import Loader from "./Loader"
 
 function CheckBox({ el, onChange }) {
   return (
@@ -88,6 +89,7 @@ class Services extends Component {
       searchStr: "",
       defaulSelected: true,
       showServiceModal: false,
+      showLoader: false,
       currenPage: 1,
       allPages: 0,
       selectedServiceName:"",
@@ -96,7 +98,7 @@ class Services extends Component {
       services: [],
 
       servicesType: this.props.servicesType,
-      message: "Services not found",
+      message: "",
     };
     this.checkboxChanged = this.checkboxChanged.bind(this);
     this.updateSearchStr = this.updateSearchStr.bind(this);
@@ -107,8 +109,13 @@ class Services extends Component {
     this.serviceClick = this.serviceClick.bind(this);
     this.applyChanges = this.applyChanges.bind(this);
     this.changePage = this.changePage.bind(this);
-
+    this.setLoaderStatus = this.setLoaderStatus.bind(this);
     this.close = this.close.bind(this);
+  }
+  setLoaderStatus(shouldBeDisplayed){
+    this.setState({
+      showLoader: shouldBeDisplayed,
+    })
   }
   close(){
     this.setState({
@@ -167,7 +174,11 @@ class Services extends Component {
     }
   }
   setServicesHtml(services) {
-
+    if(services.length<1){
+      this.setState({
+        message: "Services could not be found",
+      })
+    }
     return services.slice((this.state.currenPage - 1) * 5, 5 + (this.state.currenPage - 1) * 5).sort(this.dynamicSort(this.state.selectedSortType)).map((el) => {
       return (
         <div key={el.id} className={classes.serviceContainer} onClick={() => { this.serviceClick(el.id) }}>
@@ -181,12 +192,13 @@ class Services extends Component {
 
   }
   async getServices() {
+    this.setLoaderStatus(true);
     console.log(this.props.servicesType);
     try {
       db.ref("/" + this.props.servicesType).on("value", snapshot => {
         let services_ = [];
         if (!snapshot.val()) {
-
+          this.props.setLoaderStatus(false);
           return;
         }
         Object.values(snapshot.val()).forEach((snap) => {
@@ -196,16 +208,19 @@ class Services extends Component {
           if (selectedFilters.length > 0) {
 
             if (selectedFilters.includes(snap.type)) {
-              if (new RegExp(this.state.searchStr.replace(/\s/g, '|')).test(snap.name)) {
+              const reg = new RegExp(this.state.searchStr.replace(/\s/g, '|'), 'i');
+              if (reg.test(snap.name)) {
                 services_.push(snap);
-              } else if (new RegExp(this.state.searchStr.replace(/\s/g, '|')).test(snap.description)) {
+              } else if (reg.test(snap.description)) {
                 services_.push(snap);
               }
             }
           } else {
-            if (new RegExp(this.state.searchStr.replace(/\s/g, '|')).test(snap.name)) {
+            const reg = new RegExp(this.state.searchStr.replace(/\s/g, '|'), 'i');
+            
+            if (reg.test(snap.name)) {
               services_.push(snap);
-            } else if (new RegExp(this.state.searchStr.replace(/\s/g, '|')).test(snap.description)) {
+            } else if (reg.test(snap.description)) {
               services_.push(snap);
             }
           }
@@ -217,14 +232,17 @@ class Services extends Component {
           services: services_,
           servicesHtml: this.setServicesHtml(services_),
           allPages: Math.ceil(services_.length / 5),
+        },()=>{
+          this.setLoaderStatus(false);
         });
       });
 
     } catch (error) {
       this.setState({ message: error.message });
+      this.setLoaderStatus(false);
     }
   }
-  async componentDidMount() {
+  componentDidMount() {
     this.getServices();
   }
   selectChanged(event) {
@@ -283,7 +301,9 @@ class Services extends Component {
       checkboxes: newCheckboxArray,
     });
   }
-
+  // componentWillUnmount(){
+  //   this.props.setLoaderStatus(false);
+  // }
   // componentDidMount() {
   //   this.setState((prevState) => ({
   //     checkboxesHTML: prevState.checkboxes.map((el) => {
@@ -300,6 +320,7 @@ class Services extends Component {
   render() {
     return (
       <div className={classes.Services}>
+        { this.state.showLoader ? <Loader /> : null}
         {this.state.showServiceModal ? <ServiceModal close={this.close} name={this.state.selectedServiceName}  description={this.state.selectedServiceDescription}  /> : null}
         <div className={classes.FilterSerchBar}>
           <h2>{this.state.servicesType}</h2>
@@ -338,7 +359,7 @@ class Services extends Component {
             Reset
           </a>
         </div>
-        <div className={classes.ServicePanel}>
+        <div className={classes.ServicePanel} onError={()=>{alert(`Loading image error`)}}>
           {this.state.servicesHtml.length > 0 ? this.state.servicesHtml : this.state.message}
         </div>
         <div className={classes.Pagination} onClick={this.changePage}>

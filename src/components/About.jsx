@@ -22,7 +22,7 @@ class About extends Component {
   }
   render() {
     return (
-      <div className={classes.Home}>
+      <div className={classes.Home} onError={()=>{alert(`Loading image error`)}}>
         <div className={classes.wrapper}></div>
         <div className={classes.wrapper}>
           <h2>About page</h2>
@@ -35,7 +35,7 @@ class About extends Component {
           <div className={aboutClasses.wrapper}>
             <div className={aboutClasses.card}>
               <div className={aboutClasses.front}>
-                <img src={EraImg} alt="" />
+                <img src={EraImg} alt="Era" />
               </div>
               <div className={aboutClasses.back}>
                 <span>
@@ -56,7 +56,7 @@ class About extends Component {
           <div className={aboutClasses.wrapper}>
             <div className={aboutClasses.card}>
               <div className={aboutClasses.front}>
-                <img src={HatzDiesellogo} alt="" />
+                <img src={HatzDiesellogo} alt="HATZ" />
               </div>
               <div className={aboutClasses.back}>
                 <span>
@@ -82,7 +82,7 @@ class About extends Component {
           <div className={aboutClasses.wrapper}>
             <div className={aboutClasses.card}>
               <div className={aboutClasses.front}>
-                <img src={olisava} alt="" />
+                <img src={olisava} alt="Olisava" />
               </div>
               <div className={aboutClasses.back}>
                 <span>

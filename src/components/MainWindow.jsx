@@ -16,7 +16,7 @@ import { signin } from "../services/helpers/auth"
 import { auth } from "../services/firebase";
 import ServiceCreate from "./ServiceCreate"
 
-
+import Loader from "./Loader"
 
 class MainWindow extends Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class MainWindow extends Component {
       buttonName: "Sign in",
       isLogged: false,
       showSignInModal: false,
+      showLoader: false,
       user: {},
       pagerouters: [
         <Route
@@ -48,9 +49,13 @@ class MainWindow extends Component {
     this.signIn = this.signIn.bind(this);
     this.cancel = this.cancel.bind(this);
     this.checkUsername = this.checkUsername.bind(this);
-    
+    this.setLoaderStatus = this.setLoaderStatus.bind(this);
   }
-  
+  setLoaderStatus(shouldBeDisplayed){
+    this.setState({
+      showLoader: shouldBeDisplayed,
+    })
+  }
   componentDidMount() {
     this.unsubscribe = auth().onAuthStateChanged(currentUser => {
       if (currentUser) {
@@ -59,11 +64,12 @@ class MainWindow extends Component {
           isLogged: true,
           username: currentUser.email || "",
           buttonName: "Log out",
+          setLoaderStatus: false
         })
       }
     })
   }
-
+  
   // componentWillUnmount() {
   //   this.unsubscribe();
   // }
@@ -115,11 +121,13 @@ class MainWindow extends Component {
     })
   }
   async signIn(email, password, successCalback) {
+    this.setLoaderStatus(true);
     try {
       await signin(email, password);
     } catch (error) {
       console.log(error);
       successCalback(false);
+      this.setLoaderStatus(false);
       return;
     }
     successCalback(true);
@@ -129,6 +137,8 @@ class MainWindow extends Component {
       username: auth().currentUser.email,
       buttonName: "Log out",
       user: auth().currentUser,
+    }, ()=>{
+      this.setLoaderStatus(false);
     })
     console.log(auth().currentUser);
   }
@@ -164,6 +174,7 @@ class MainWindow extends Component {
           style={{ width: 35, height: 35 }}
           ToggledStyle={{ right: 60 }}
         />
+        { this.state.showLoader ? <Loader />: null}
         <div className={classes.MainWindow}>
           <header className={classes.header}>
             <h2>ERA Kyiv</h2>
@@ -180,7 +191,7 @@ class MainWindow extends Component {
           </header>
           <Header isLogged={this.state.isLogged}/>
           {this.state.pagerouters}
-          {this.state.isLogged ? <Route key="servicecreate" path="/servicecreate" component={ServiceCreate} />: null}
+          {this.state.isLogged ? <Route key="servicecreate" path="/servicecreate" component={()=><ServiceCreate />} />: null}
           {this.state.showSignInModal ? <SignInModal cancel={this.cancel} signIn={this.signIn} /> : null}
 
           <footer className={classes.footer}></footer>

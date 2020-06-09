@@ -37,8 +37,112 @@
 }
 
 .header .signIn .authorisationButton {
+  cursor: pointer;
   color: white;
   border-left: solid 1px white;
   margin: auto;
   padding: 5px;
+}
+
+.cssloadContainer {
+  position: relative;
+  display: flex;
+  /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  /* Stay in place */
+  z-index: 100;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.cssloadWhirlpool,
+.cssloadWhirlpool::before,
+.cssloadWhirlpool::after {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid #cccccc;
+  border-left-color: black;
+  border-radius: 2123px;
+  -o-border-radius: 2123px;
+  -ms-border-radius: 2123px;
+  -webkit-border-radius: 2123px;
+  -moz-border-radius: 2123px;
+}
+
+.cssloadWhirlpool {
+  margin: -53px 0 0 -53px;
+  height: 106px;
+  width: 106px;
+  animation: cssload-rotate 2050ms linear infinite;
+  -o-animation: cssload-rotate 2050ms linear infinite;
+  -ms-animation: cssload-rotate 2050ms linear infinite;
+  -webkit-animation: cssload-rotate 2050ms linear infinite;
+  -moz-animation: cssload-rotate 2050ms linear infinite;
+}
+
+.cssloadWhirlpool::before {
+  content: "";
+  margin: -49px 0 0 -49px;
+  height: 94px;
+  width: 94px;
+  animation: cssload-rotate 2050ms linear infinite;
+  -o-animation: cssload-rotate 2050ms linear infinite;
+  -ms-animation: cssload-rotate 2050ms linear infinite;
+  -webkit-animation: cssload-rotate 2050ms linear infinite;
+  -moz-animation: cssload-rotate 2050ms linear infinite;
+}
+
+.cssloadWhirlpool::after {
+  content: "";
+  margin: -62px 0 0 -62px;
+  height: 119px;
+  width: 119px;
+  animation: cssload-rotate 4100ms linear infinite;
+  -o-animation: cssload-rotate 4100ms linear infinite;
+  -ms-animation: cssload-rotate 4100ms linear infinite;
+  -webkit-animation: cssload-rotate 4100ms linear infinite;
+  -moz-animation: cssload-rotate 4100ms linear infinite;
+}
+
+@keyframes cssload-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes cssload-rotate {
+  100% {
+    -o-transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes cssload-rotate {
+  100% {
+    -ms-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes cssload-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes cssload-rotate {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
 }

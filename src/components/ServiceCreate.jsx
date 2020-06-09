@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import classes from "./../style/ServiceCreate.module.css";
 import {db, storage} from "../services/firebase"
 import { auth } from "../services/firebase";
+import Loader from "./Loader"
+
 class ServiceCreate extends Component {
     constructor(props) {
         super(props);
@@ -12,6 +14,7 @@ class ServiceCreate extends Component {
             productionTypeSelected: "default",
             showFileInput: true,
             showUrlInput: true,
+            showLoader: false,
             clearOptionVisibility: "hidden",
             fileName: "",
             imgUrlInput: "",
@@ -33,7 +36,16 @@ class ServiceCreate extends Component {
         this.checkImageUrl = this.checkImageUrl.bind(this);
         this.createService = this.createService.bind(this);
         this.uploadService = this.uploadService.bind(this);
+        this.setLoaderStatus = this.setLoaderStatus.bind(this);
     }
+    // componentWillUnmount(){
+    //     this.props.setLoaderStatus(false);
+    // }
+    setLoaderStatus(shouldBeDisplayed){
+        this.setState({
+          showLoader: shouldBeDisplayed,
+        })
+      }
     componentDidMount(){
         const productType = [
             {
@@ -81,16 +93,21 @@ class ServiceCreate extends Component {
     }
     async uploadService(service){
         console.log(auth().currentUser);
+        
         try {
+            this.setLoaderStatus(true);
             await db.ref(this.state.serviceTypeSelected).push(service);
             await this.setState({
                 errorMessage: "Success result"
+            },()=>{
+                this.setLoaderStatus(false);
             })
           } catch (error) {
             this.setState({ errorMessage: error.message });
+            this.setLoaderStatus(false);
             return;
           }
-        
+          this.setLoaderStatus(false);
     }
     createService(){
         const d = new Date();
@@ -224,6 +241,7 @@ class ServiceCreate extends Component {
     render() {
         return (
             <div className={classes.servicecreate}>
+                 {this.state.showLoader ? <Loader /> : null}
                 <div className={classes.headingPart}>
                     <h2>Create Service Page</h2>
                     <p>On this page you can create new services. Pistures and details are optional, but you must select type of a service, production type and enter its name.</p>
